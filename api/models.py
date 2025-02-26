@@ -11,6 +11,7 @@ class Invoice(models.Model):
     pattern = models.CharField(max_length=50, choices=PATTERN_CHOICES)
     open = models.BooleanField(default=True)
     group_id = models.CharField(max_length=50)
+    confidence = models.CharField(max_length=6, default='High')
 
     def __str__(self):
         return f"Invoice {self.reference} from {self.vendor} on {self.date}"

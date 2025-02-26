@@ -7,4 +7,4 @@ from .models import Invoice
 class InvoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
-        fields = 'reference', 'date', 'value', 'vendor', 'pattern', 'open', 'group_id'
+        fields = 'reference', 'date', 'value', 'vendor', 'pattern', 'open', 'group_id', 'confidence'
