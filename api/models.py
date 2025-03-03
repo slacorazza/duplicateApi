@@ -27,10 +27,10 @@ class Invoice(models.Model):
     open = models.BooleanField(default=True)
     group_id = models.CharField(max_length=50)
     confidence = models.CharField(max_length=6)
-    Region = models.CharField(max_length=50, default='North')
-    Description = models.CharField(max_length=250, default='No description')
-    Payment_Method = models.CharField(max_length=50, default='Credit Card')
-    Special_Instructions = models.CharField(max_length=50, blank=True, null=True)
+    region = models.CharField(max_length=50, default='North')
+    description = models.CharField(max_length=250, default='No description')
+    payment_method = models.CharField(max_length=50, default='Credit Card')
+    special_instructions = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f"Invoice {self.reference} from {self.vendor} on {self.date}"

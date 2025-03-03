@@ -96,7 +96,7 @@ class Command(BaseCommand):
                 else:
                     open_ = False
 
-                Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, Region=region, Description=description, Payment_Method=payment_method, Special_Instructions=special_instructions)
+                Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, region=region, description=description, payment_method=payment_method, special_instructions=special_instructions)
                 
                 counter += 1
                 
@@ -114,6 +114,6 @@ class Command(BaseCommand):
                         description = self.similar_text(description)
                     
 
-                    Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, Region=region, Description=description, Payment_Method=payment_method, Special_Instructions=special_instructions)
+                    Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, region=region, description=description, payment_method=payment_method, special_instructions=special_instructions)
 
         self.stdout.write(self.style.SUCCESS('Data added successfully'))

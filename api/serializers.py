@@ -18,4 +18,4 @@ class InvoiceSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Invoice
-        fields = 'reference', 'date', 'value', 'vendor', 'pattern', 'open', 'group_id', 'confidence', 'Region', 'Description', 'Payment_Method', 'Special_Instructions'
+        fields = 'reference', 'date', 'value', 'vendor', 'pattern', 'open', 'group_id', 'confidence', 'region', 'description', 'payment_method', 'special_instructions'
