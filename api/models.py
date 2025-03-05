@@ -31,6 +31,7 @@ class Invoice(models.Model):
     description = models.CharField(max_length=250, default='No description')
     payment_method = models.CharField(max_length=50, default='Credit Card')
     special_instructions = models.CharField(max_length=50, blank=True, null=True)
+    accuracy = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Invoice {self.reference} from {self.vendor} on {self.date}"

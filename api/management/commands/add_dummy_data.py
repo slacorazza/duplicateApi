@@ -54,6 +54,21 @@ class Command(BaseCommand):
             return text[:index] + chr(random.randint(97, 122)) + text[index + 1:]
         return text
     
+    def get_accuracy(self, confidence, pattern):
+        """
+        Get the accuracy based on the confidence level.
+        """
+        if pattern == 'Exact Match':
+            return 100
+        elif confidence == 'High':
+            return random.randint(95, 99)
+        elif confidence == 'Medium':
+            return random.randint(90, 94)
+        elif confidence == 'Low':
+            return random.randint(80, 89)
+        else:
+            return random.randint(0, 49)
+        
     def handle(self, *args, **kwargs):
         """
         Handle the command to add data to the database from the CSV file.
@@ -67,11 +82,11 @@ class Command(BaseCommand):
             counter = 0
 
             for  row in reader:
-                duplicate_n = random.randint(0, 5)
+                duplicate_n = random.randint(1, 5)
                 invoice_ref = 'INV-' + str(counter)
                 date_str = row['Earliest Due Date']
                 if date_str == '':
-                    date = datetime(2024, 1, 1) + timedelta(days=counter)
+                    date = datetime(2025, 1, 1) + timedelta(days=counter + random.randint(1, 100))
                 else:
                     date = parse_datetime(date_str)
                     # Convert date from MM/DD/YYYY to YYYY-MM-DD format
@@ -89,6 +104,7 @@ class Command(BaseCommand):
                 description = row['Description']
                 payment_method = random.choice(['Credit Card', 'Bank Transfer', 'PayPal', 'Cash'])
                 special_instructions = row['Special Intructions']
+                accuracy = self.get_accuracy(confidense, pattern)
 
 
                 if 'Open' in row['Group Contains']:
@@ -96,12 +112,12 @@ class Command(BaseCommand):
                 else:
                     open_ = False
 
-                Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, region=region, description=description, payment_method=payment_method, special_instructions=special_instructions)
+                Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, region=region, description=description, payment_method=payment_method, special_instructions=special_instructions, accuracy=accuracy)
                 
                 counter += 1
                 
+                # Add duplicate data based on the pattern
                 for i in range(1, duplicate_n):
-                    invoice_ref = 'INV-' + str(counter)
                     if pattern == 'Similar Value':
                         value = str(float(value) + random.randint(-30, 30))
                     elif pattern == 'Similar Vendor':
@@ -114,6 +130,6 @@ class Command(BaseCommand):
                         description = self.similar_text(description)
                     
 
-                    Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, region=region, description=description, payment_method=payment_method, special_instructions=special_instructions)
+                    Invoice.objects.create(reference=invoice_ref, date=date, value=value, vendor=vendor, pattern=pattern, open=open_, group_id=group_id, confidence=confidense, region=region, description=description, payment_method=payment_method, special_instructions=special_instructions, accuracy=accuracy)
 
         self.stdout.write(self.style.SUCCESS('Data added successfully'))

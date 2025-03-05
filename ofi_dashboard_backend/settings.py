@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'rest_framework.authtoken',
+    'ai_agent',
 ]
 
 MIDDLEWARE = [
