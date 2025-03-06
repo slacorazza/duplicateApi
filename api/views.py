@@ -90,3 +90,20 @@ class KPIsList(APIView):
             print(f"Error processing request: {e}")
             return Response({"error": str(e)}, status=500)
         
+class Metadata(APIView):
+    def get (self, request, format=None):
+        try:
+            reference_list = Invoice.objects.values_list('reference', flat=True).distinct()
+            vendor_list = Invoice.objects.values_list('vendor', flat=True).distinct()
+            pattern_list = Invoice.objects.values_list('pattern', flat=True).distinct()
+            date_list = Invoice.objects.values_list('date', flat=True).distinct()
+            return Response({
+                'reference_values': reference_list,
+                'vendor_values': vendor_list,
+                'pattern_values': pattern_list,
+                'date_values': date_list
+            })
+           
+        except Exception as e:
+            print(f"Error processing request: {e}")
+            return Response({"error": str(e)}, status=500)
