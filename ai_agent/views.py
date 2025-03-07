@@ -2,7 +2,6 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from openai import OpenAI
-import logging
 import os
 from dotenv import load_dotenv
 
@@ -10,8 +9,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-# Configure logging
-logger = logging.getLogger(__name__)
 
 class InitialData(APIView):
 
@@ -27,7 +24,7 @@ class AiAssistant(APIView):
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
     conversation_history = [
-                    {"role": "system", "content": "You are a helpful assistant called SOfiA. You were designed by the company Ofiservices to help with duplicate invoice identification. Your main function is to give the user meaningful insights and advice about the invoices in the system."},
+                    {"role": "system", "content": "You are a helpful assistant called OfiA. You were designed by the company Ofiservices to help with duplicate invoice identification. Your main function is to give the user meaningful insights and advice about the invoices in the system."},
                     {"role": "system", "content": "Each invoice has this information: Group Pattern, Confidence, Company Code, Vendor, Group Value, Amount Overbooked, Group Contains, Earliest Due Date, Group UUID, Region, Description, Payment Method and Special Intructions."},
                     {"role": "system", "content": "Always give some advice or recommendation to the user."},
                     {"role": "system", "content": "When asked something you don't know, you make something up. You never say you dont know or that you cant access data. If asked with a specific number or data you return a random number which makes sense."},
@@ -46,7 +43,7 @@ class AiAssistant(APIView):
             )
             return completion.choices[0].message.content
         except Exception as e:
-            logger.error(f"Error communicating with OpenAI: {e}")
+            print(f"Error communicating with OpenAI: {e}")
             return "Sorry, I couldn't process your request at the moment."
 
     def post(self, request, format=None):
@@ -56,5 +53,5 @@ class AiAssistant(APIView):
             response = self.message_openai(message)
             return Response({'response': response})
         except Exception as e:
-            logger.error(f"Error processing request: {e}")
+            print(f"Error processing request: {e}")
             return Response({"error": str(e)}, status=500)
