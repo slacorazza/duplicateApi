@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'api.middleware.CorsMiddleware',
+    'ai_agent.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'ofi_dashboard_backend.urls'
