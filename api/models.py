@@ -21,6 +21,8 @@ class Invoice(models.Model):
     """
     reference = models.CharField(max_length=50)
     date = models.DateTimeField(null=True, blank=True)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
     value = models.DecimalField(max_digits=10, decimal_places=2)
     vendor = models.CharField(max_length=50)
     pattern = models.CharField(max_length=50, choices=PATTERN_CHOICES)
@@ -30,6 +32,7 @@ class Invoice(models.Model):
     region = models.CharField(max_length=50, default='North')
     description = models.CharField(max_length=250, default='No description')
     payment_method = models.CharField(max_length=50, default='Credit Card')
+    pay_date = models.DateTimeField(null=True, blank=True)
     special_instructions = models.CharField(max_length=50, blank=True, null=True)
     accuracy = models.IntegerField(default=0)
 

@@ -16,7 +16,8 @@ class InitialData(APIView):
         return Response({
             'New Invoices': 23,
             'New Duplicate Invoices': 6,
-            'Alert': 'The company Acme Corporation has 3 new invoices with a high confidence level of being duplicates. I recommend reviewing these invoices.',
+            'Alert': 'The company WCB - British Columbia has 4 new invoices with a high confidence level of being duplicated. These invoices have references INV-180, INV-181, INV-182 and INV-183 I recommend reviewing these invoices.',
+        
         })
 
 class AiAssistant(APIView):
