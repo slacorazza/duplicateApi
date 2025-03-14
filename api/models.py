@@ -8,6 +8,8 @@ class Invoice(models.Model):
     Attributes:
         reference (str): The unique reference for the invoice.
         date (datetime): The date of the invoice.
+        unit_price (decimal): The unit price of the invoice.
+        quantity (int): The quantity of the invoice.
         value (decimal): The value of the invoice.
         vendor (str): The name of the vendor without code.
         pattern (str): The pattern type of the invoice.
@@ -17,6 +19,7 @@ class Invoice(models.Model):
         Region (str): The region associated with the invoice.
         Description (str): The description of the invoice.
         Payment_Method (str): The payment method for the invoice.
+        Pay_Date (datetime): The payment date of the invoice.
         Special_Instructions (str): Any special instructions for the invoice.
     """
     reference = models.CharField(max_length=50)

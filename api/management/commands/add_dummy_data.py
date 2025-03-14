@@ -135,7 +135,7 @@ class Command(BaseCommand):
                 counter += 1
             
                 # Add duplicate data based on the pattern
-                for i in range(1, duplicate_n):
+                for i in range(0, duplicate_n):
                     invoice_ref = 'INV-' + str(counter)
                     if pattern == 'Similar Value':
                         value = str(float(value) + random.randint(-30, 30))
